@@ -5,6 +5,9 @@ LABEL Description="Serveur de messagerie" \
 RUN apk update
 RUN apk add dovecot-ldap
 # Attention Génération clé /etc/ssl/dovecot/server.key
+ADD Files/ /
+
+
 
 
 CMD ["/usr/sbin/dovecot","-F"]
