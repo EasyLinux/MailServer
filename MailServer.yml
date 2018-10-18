@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  LinuxAD:
+    image: easylinux/samba-ad-dc
+    volumes:
+      - /Data/Docker/AD:/AD
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  Smtp:
+    image: easylinux/mailserver:smtp
+    volumes:
+      - /Data/Docker/Mail:/Data
