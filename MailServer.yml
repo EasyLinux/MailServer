@@ -15,3 +15,12 @@ services:
     image: easylinux/mailserver:smtp
     volumes:
       - /Data/Docker/Mail:/Data
+    ports:
+      - 25:25
+
+  Imap:
+    image: easylinux/mailserver:imap
+    volumes:
+      - /Data/Docker/Mail:/Data
+    ports:
+      - 143:143
