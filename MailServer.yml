@@ -5,22 +5,26 @@ services:
   LinuxAD:
     image: easylinux/samba-ad-dc
     volumes:
-      - /Data/Docker/AD:/AD
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
+      - AD:/AD
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.role == manager
 
   Smtp:
     image: easylinux/mailserver:smtp
     volumes:
-      - /Data/Docker/Mail:/Data
+      - MAILS:/Data
     ports:
       - 25:25
 
   Imap:
     image: easylinux/mailserver:imap
     volumes:
-      - /Data/Docker/Mail:/Data
+      - MAILS:/Data
     ports:
       - 143:143
+
+volumes:
+  AD:
+  MAILS:

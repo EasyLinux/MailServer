@@ -1,5 +1,5 @@
 FROM alpine:3.8
-LABEL Description="Serveur de messagerie" \
+LABEL description="Serveur de messagerie" \
       author="Serge NOEL <serge.noel@net6a.com>"
 
 RUN mkdir -p /Data/Dovecot.Imap
