@@ -1,9 +1,24 @@
 #!/bin/sh
 
+clear
 echo "Initializing samba database..."
-samba-tool domain provision --use-rfc2307 --interactive --dns-backend=BIND9_DLZ
+echo -n "REALM for the domain : "
+read Realm
+echo -n "Choose a Netbios Domain : "
+read Domain
+echo -n "Server hostname : "
+read HostName
+
+samba-tool domain provision --domain=$Domain --host-name=$HostName --dns-backend=BIND9_DLZ --server-role=dc --realm=$Realm --use-rfc2307 --adminpass=SuperSecr3t
+#  --site=SITENAME       set site name
 
 cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
+
+sed -i "/\[global\]/a \\\t\# enable unencrypted passwords\n\tldap server require strong auth = no" /etc/samba/smb.conf
+sed -i "/\[global\]/a \\\t\# Allow online schema extension\ndsdb:schema update allowed=true" /etc/samba/smb.conf
+
+
+
 #if [ "${LDAP_ALLOW_INSECURE,,}" == "true" ]; then
 #  sed -i "/\[global\]/a \\\t\# enable unencrypted passwords\nldap server require strong auth = no" /etc/samba/smb.conf
 #fi

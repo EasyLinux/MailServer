@@ -14,11 +14,13 @@ RUN mkdir -p /AD/etc /AD/etc/samba /AD/etc/cups /AD/etc/sssd /AD/var/lib/samba /
     && ln -s /AD/Data /Data \
     && ln -s /AD/var/lib/samba/private/krb5.conf /etc/krb5.conf \
     && apk update \
-    && apk add samba-dc samba-client bind bind-tools supervisor krb5-server tdb rsyslog \
+    && apk add samba-dc samba-client bind supervisor tdb \
     && rm /etc/samba/smb.conf \
     && chmod a+x /usr/local/bin/launch-samba \
     && chmod a+x /usr/local/bin/setup-samba \
     && rm -rf /var/cache/apk/*
+
+# apk add samba-dc samba-client bind bind-tools supervisor krb5-server tdb rsyslog
 
 # Install samba
 EXPOSE 53 389 88 135 139 138 445 464 3268 3269 123/udp
